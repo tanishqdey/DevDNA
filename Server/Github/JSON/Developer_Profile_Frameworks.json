@@ -1,0 +1,361 @@
+{
+  "frontendDeveloper": {
+    "role": "Frontend Developer",
+    "categories": {
+      "Frontend Fundamentals": {
+        "weight": 20,
+        "skills": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ]
+      },
+      "Frontend Frameworks": {
+        "weight": 25,
+        "skills": [
+          "React",
+          "Next.js",
+          "Vue",
+          "Angular"
+        ]
+      },
+      "Frontend Styling": {
+        "weight": 15,
+        "skills": [
+          "Tailwind",
+          "Bootstrap",
+          "Sass"
+        ]
+      },
+      "Frontend State Management": {
+        "weight": 10,
+        "skills": [
+          "Redux",
+          "Zustand"
+        ]
+      },
+      "Frontend Tooling": {
+        "weight": 10,
+        "skills": [
+          "Vite",
+          "Webpack"
+        ]
+      },
+      "Frontend Testing": {
+        "weight": 10,
+        "skills": [
+          "Jest",
+          "Cypress"
+        ]
+      }
+    }
+  },
+  "backendDeveloper": {
+    "role": "Backend Developer",
+    "categories": {
+      "Backend Programming": {
+        "weight": 20,
+        "skills": [
+          "Node.js",
+          "Java",
+          "Python",
+          "Go"
+        ]
+      },
+      "Api Development": {
+        "weight": 20,
+        "skills": [
+          "REST API",
+          "GraphQL"
+        ]
+      },
+      "Databases": {
+        "weight": 20,
+        "skills": [
+          "MongoDB",
+          "PostgreSQL",
+          "MySQL"
+        ]
+      },
+      "Authentication": {
+        "weight": 20,
+        "skills": [
+          "JWT",
+          "OAuth"
+        ]
+      },
+      "Backend Caching": {
+        "weight": 10,
+        "skills": [
+          "Redis"
+        ]
+      }
+    }
+  },
+  "fullStackDeveloper": {
+    "role": "Full Stack Developer",
+    "categories": {
+      "Fullstack Frontend Skills": {
+        "weight": 25,
+        "skills": [
+          "React",
+          "Next.js",
+          "TypeScript"
+        ]
+      },
+      "Fullstack Backend Skills": {
+        "weight": 25,
+        "skills": [
+          "Node.js",
+          "Express",
+          "REST API"
+        ]
+      },
+      "Fullstack Database Handling": {
+        "weight": 15,
+        "skills": [
+          "MongoDB",
+          "PostgreSQL"
+        ]
+      },
+      "Web Deployment": {
+        "weight": 15,
+        "skills": [
+          "Docker",
+          "CI/CD"
+        ]
+      },
+      "Web Testing": {
+        "weight": 10,
+        "skills": [
+          "Jest",
+          "Cypress"
+        ]
+      },
+      "Version Control": {
+        "weight": 10,
+        "skills": [
+          "Git",
+          "GitHub"
+        ]
+      }
+    }
+  },
+  "dataScientist": {
+    "role": "Data Scientist",
+    "categories": {
+      "Data Science Programming": {
+        "weight": 15,
+        "skills": [
+          "Python"
+        ]
+      },
+      "Data Analysis": {
+        "weight": 20,
+        "skills": [
+          "Pandas",
+          "NumPy"
+        ]
+      },
+      "Statistics": {
+        "weight": 20,
+        "skills": [
+          "Statistics",
+          "Probability"
+        ]
+      },
+      "Visualization": {
+        "weight": 15,
+        "skills": [
+          "Matplotlib",
+          "Seaborn",
+          "Plotly"
+        ]
+      },
+      "SQL": {
+        "weight": 10,
+        "skills": [
+          "SQL"
+        ]
+      }
+    }
+  },
+  "mlEngineer": {
+    "role": "Machine Learning Engineer",
+    "categories": {
+      "Machine Learning Programming": {
+        "weight": 15,
+        "skills": [
+          "Python"
+        ]
+      },
+      "Data Processing": {
+        "weight": 15,
+        "skills": [
+          "Pandas",
+          "NumPy"
+        ]
+      },
+      "Machine Learning": {
+        "weight": 25,
+        "skills": [
+          "Scikit-Learn",
+          "Regression",
+          "Classification",
+          "Clustering"
+        ]
+      },
+      "Deep Learning": {
+        "weight": 20,
+        "skills": [
+          "TensorFlow",
+          "PyTorch"
+        ]
+      },
+      "Machine Learning Deployment": {
+        "weight": 15,
+        "skills": [
+          "FastAPI",
+          "Docker"
+        ]
+      }
+    }
+  },
+  "aiEngineer": {
+    "role": "AI Engineer",
+    "categories": {
+      "LLMs": {
+        "weight": 25,
+        "skills": [
+          "OpenAI",
+          "Gemini",
+          "Claude"
+        ]
+      },
+      "RAG-based Learning": {
+        "weight": 20,
+        "skills": [
+          "RAG",
+          "Embeddings",
+          "Vector Databases"
+        ]
+      },
+      "AI Frameworks": {
+        "weight": 15,
+        "skills": [
+          "LangChain",
+          "LlamaIndex"
+        ]
+      },
+      "AI Programming": {
+        "weight": 15,
+        "skills": [
+          "Python"
+        ]
+      },
+      "AI Deployment": {
+        "weight": 15,
+        "skills": [
+          "FastAPI",
+          "Docker"
+        ]
+      },
+      "AI Evaluation": {
+        "weight": 10,
+        "skills": [
+          "Prompt Engineering"
+        ]
+      }
+    }
+  },
+  "devopsEngineer": {
+    "role": "DevOps Engineer",
+    "categories": {
+      "Containers": {
+        "weight": 20,
+        "skills": [
+          "Docker",
+          "Kubernetes"
+        ]
+      },
+      "Cloud": {
+        "weight": 20,
+        "skills": [
+          "AWS",
+          "Azure",
+          "GCP"
+        ]
+      },
+      "CICD": {
+        "weight": 20,
+        "skills": [
+          "GitHub Actions",
+          "Jenkins"
+        ]
+      },
+      "Infrastructure": {
+        "weight": 15,
+        "skills": [
+          "Terraform"
+        ]
+      },
+      "Monitoring": {
+        "weight": 10,
+        "skills": [
+          "Prometheus",
+          "Grafana"
+        ]
+      }
+    }
+  },
+  "cyberSecurityEngineer": {
+    "role": "Cyber Security Engineer",
+    "categories": {
+      "Networking": {
+        "weight": 20,
+        "skills": [
+          "TCP/IP",
+          "DNS",
+          "HTTP"
+        ]
+      },
+      "Operating Systems": {
+        "weight": 15,
+        "skills": [
+          "Linux",
+          "Windows"
+        ]
+      },
+      "Security Tools": {
+        "weight": 20,
+        "skills": [
+          "Wireshark",
+          "Burp Suite",
+          "Nmap"
+        ]
+      },
+      "Web Security": {
+        "weight": 20,
+        "skills": [
+          "OWASP",
+          "JWT Security",
+          "Authentication"
+        ]
+      },
+      "Scripting": {
+        "weight": 10,
+        "skills": [
+          "Python",
+          "Bash"
+        ]
+      },
+      "Penetration Testing": {
+        "weight": 15,
+        "skills": [
+          "CTF",
+          "Pentesting"
+        ]
+      }
+    }
+  }
+}
