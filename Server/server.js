@@ -21,8 +21,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/createUser", signUp);
-app.use("/api/auth",signIn);
-app.use("/api/fetch",fetchData);
+app.use("/api/auth", signIn);
+app.use("/api/fetch", fetchData);
 //app.use("/api/fetch",bulkFetch);
 
 DBConnect()
@@ -34,6 +34,9 @@ DBConnect()
             console.log(`Server running on port ${process.env.PORT || 5000}`);
         });
     })
-    .catch((err) => {
-        console.error("MongoDB connection failed ❌", err);
+    .catch((error) => {
+        console.error("MongoDB connection failed ❌");
+        console.error(error);
+
+        process.exit(1);
     });
