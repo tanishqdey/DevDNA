@@ -14,8 +14,32 @@ export async function getRepoData(gUserName) {
         Accept: "application/vnd.github+json"
     };
 
-    const res = await fetch(`${process.env.GITHUB_API_URL}/users/${gUserName}/repos`, { headers })
-    const repos = await res.json()
+    let page = 1
+    let repos = []
+
+    while (true) {
+
+        const res = await fetch(`${process.env.GITHUB_API_URL}/users/${gUserName}/repos?per_page=100&page=${page}`, { headers })
+
+        if (!res.ok) {
+            const errorData = await res.text()
+
+            throw new Error(
+                `Failed to fetch repositories: ${res.status} ${errorData}`
+            )
+        }
+        
+        const pageRepos = await res.json()
+
+        repos.push(...pageRepos)
+
+        if (pageRepos.length < 100) {
+            break;
+        }
+
+        page++;
+
+    }
 
     const totalRepos = repos.length
     const originalRepos = repos.filter(repo => !repo.fork).length
@@ -31,7 +55,7 @@ export async function getRepoData(gUserName) {
     let soloProjects = 0
     let collabedProjects = 0
     for (const repo of repos) {   // Don't use (const repo in repos) then repo will be 0,1,2,..
-        const response = await fetch(`${process.env.GITHUB_API_URL}/repos/${repo.owner.login}/${repo.name}/contributors`, { headers })
+        const response = await fetch(`${process.env.GITHUB_API_URL}/repos/${repo.owner.login}/${repo.name}/contributors?per_page=2`, { headers })
         const contributors = await response.json()
 
         if (contributors.length == 1) {
@@ -97,11 +121,11 @@ export async function getRepoData(gUserName) {
     }
 
     for (const repo of repos) {
-        await packageJsonData(repo, headers, userSkills , knownTech)
+        await packageJsonData(repo, headers, userSkills, knownTech)
     }
 
     for (const repo of repos) {
-        await requirementsData(repo, headers, userSkills)
+        await requirementsData(repo, headers, userSkills, knownTech)
     }
 
     const Strengths = new Set()

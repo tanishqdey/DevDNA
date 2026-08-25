@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import { DBConnect } from "./Database/dbConnection.js";
 import signUp from "./routes/createUser.routes.js";
 import signIn from "./routes/userAuth.routes.js";
-import fetchData from "./routes/fetchData.routes.js"
+import fetchData from "./routes/fetchData.routes.js";
+import bulkFetch from "./routes/bulkFetch.routes.js"
 
 dotenv.config({
     path: ".env"
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/createUser", signUp);
 app.use("/api/auth",signIn);
 app.use("/api/fetch",fetchData);
+app.use("/api/fetch",bulkFetch);
 
 DBConnect()
     .then(() => {

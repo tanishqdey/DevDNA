@@ -27,7 +27,16 @@ export async function requirementsData(
 
         if (!treeRes.ok) {
             console.log(
-                `Unable to fetch repository tree: ${owner}/${repoName}`
+                `Unable to fetch repository tree: ${owner}/${repoName}`,
+                {
+                    status: treeRes.status,
+                    statusText: treeRes.statusText,
+                    response: errorData,
+                    remaining: treeRes.headers.get("x-ratelimit-remaining"),
+                    limit: treeRes.headers.get("x-ratelimit-limit"),
+                    reset: treeRes.headers.get("x-ratelimit-reset"),
+                    retryAfter: treeRes.headers.get("retry-after")
+                }
             );
 
             return userSkills;
