@@ -23,6 +23,8 @@ env/
 /Server/MachineLearning/
 /data/
 
+Server/routes/bulkFetch.routes.js
+
 # Build output
 dist/
 build/
