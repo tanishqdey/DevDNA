@@ -8,7 +8,11 @@ import express from "express"
 const router = express.Router()
 router.get("/gitHubData/myAnalysis", verifyJWT, async function (req, res) {
     try {
-        const gUserName = req.user.userName
+        console.log("req.user:", req.user);
+
+        const gUserName = req.user?.userName;
+
+        console.log("GitHub username:", gUserName);
 
         if (!gUserName) {
             return res
@@ -37,7 +41,7 @@ router.get("/gitHubData/myAnalysis", verifyJWT, async function (req, res) {
         //console.log(fetchedData)
 
         const data = {
-            gUserName : gUserName,
+            gUserName: gUserName,
             avatarUrl: avatarUrl,
             totalRepos: fetchedData.totalRepos,
             originalRepos: fetchedData.originalRepos,
@@ -65,9 +69,22 @@ router.get("/gitHubData/myAnalysis", verifyJWT, async function (req, res) {
             .json(new ApiResponse(201, data, "User's github data fetched"))
     }
     catch (e) {
+        // return res
+        //     .status(500)
+        //     .json(new ApiError(500, `FetchData Route Server Error : ${e}`))
+
+        console.error("❌ FETCH DATA ERROR:");
+        console.error(e);
+        console.error(e.stack);
+
         return res
             .status(500)
-            .json(new ApiError(500, `FetchData Route Server Error : ${e}`))
+            .json(
+                new ApiError(
+                    500,
+                    e.message || "Internal Server Error"
+                )
+            );
     }
 })
 
