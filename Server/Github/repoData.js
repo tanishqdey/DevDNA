@@ -28,7 +28,7 @@ export async function getRepoData(gUserName) {
                 `Failed to fetch repositories: ${res.status} ${errorData}`
             )
         }
-        
+
         const pageRepos = await res.json()
 
         repos.push(...pageRepos)
@@ -56,7 +56,19 @@ export async function getRepoData(gUserName) {
     let collabedProjects = 0
     for (const repo of repos) {   // Don't use (const repo in repos) then repo will be 0,1,2,..
         const response = await fetch(`${process.env.GITHUB_API_URL}/repos/${repo.owner.login}/${repo.name}/contributors?per_page=2`, { headers })
-        const contributors = await response.json()
+        if (!response.ok) {
+            const errorText = await response.text();
+
+            console.error(
+                `Contributors fetch failed for ${repo.name}:`,
+                response.status,
+                errorText
+            );
+
+            continue;
+        }
+
+        const contributors = await response.json();
 
         if (contributors.length == 1) {
             soloProjects += 1
@@ -93,7 +105,19 @@ export async function getRepoData(gUserName) {
     const languageBytes = {}
     for (const repo of repos) {
         const langRes = await fetch(`${process.env.GITHUB_API_URL}/repos/${repo.owner.login}/${repo.name}/languages`, { headers })
-        const languages = await langRes.json()
+        if (!langRes.ok) {
+            const errorText = await langRes.text();
+
+            console.error(
+                `Languages fetch failed for ${repo.name}:`,
+                langRes.status,
+                errorText
+            );
+
+            continue;
+        }
+
+        const languages = await langRes.json();
 
         for (const language in languages) {
             if (languageBytes[language]) {
