@@ -75,7 +75,7 @@ const dashBoard = () => {
             name = {fetchedData.gUserName}
             avatar = {fetchedData.avatarUrl}
             skillScores = {fetchedData.skillScores}
-            onExport = {()=>{initPDF(fetchedData,gUserName)}}
+            onExport = {()=>{initPDF(fetchedData,fetchedData.gUserName)}}
             onAnalyseAgain = {()=> window.location.reload()} // refresh page 
             />
             <div className="m-5">
