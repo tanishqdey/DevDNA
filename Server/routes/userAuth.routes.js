@@ -28,19 +28,31 @@ router.post("/signIn", async function (req, res) {
 
         // CREATE JWT TOKEN
         const accessToken = jwt.sign(
-            { _id: alreadyUser._id, email: alreadyUser.email , userName : alreadyUser.gUserName},
+            { _id: alreadyUser._id, email: alreadyUser.email, userName: alreadyUser.gUserName },
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
 
         return res
             .status(200)
-            .json(new ApiResponse(200, {user : alreadyUser,token : accessToken}, "User found successfully ."))
+            .json(new ApiResponse(200, { user: alreadyUser, token: accessToken }, "User found successfully ."))
     }
-    catch(err){
-        return res
-            .status(500)
-            .json(new ApiError(500,`userAuth Server Error : ${err}`))
+    catch (error) {
+        // return res
+        //     .status(500)
+        //     .json(new ApiError(500,`userAuth Server Error : ${err}`))
+
+        console.error("❌ SIGN IN ERROR:");
+        console.error(error);
+        console.error("Message:", error.message);
+        console.error("Stack:", error.stack);
+
+        return res.status(500).json({
+            statusCode: 500,
+            data: null,
+            success: false,
+            errors: [error.message]
+        });
     }
 })
 
