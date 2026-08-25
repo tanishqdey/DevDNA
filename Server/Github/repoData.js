@@ -14,32 +14,19 @@ export async function getRepoData(gUserName) {
         Accept: "application/vnd.github+json"
     };
 
-    let page = 1
-    let repos = []
 
-    while (true) {
+    const res = await fetch(`${process.env.GITHUB_API_URL}/users/${gUserName}/repos?per_page=50&sort=updated`, { headers })
 
-        const res = await fetch(`${process.env.GITHUB_API_URL}/users/${gUserName}/repos?per_page=100&page=${page}`, { headers })
+    if (!res.ok) {
+        const errorData = await res.text()
 
-        if (!res.ok) {
-            const errorData = await res.text()
-
-            throw new Error(
-                `Failed to fetch repositories: ${res.status} ${errorData}`
-            )
-        }
-
-        const pageRepos = await res.json()
-
-        repos.push(...pageRepos)
-
-        if (pageRepos.length < 100) {
-            break;
-        }
-
-        page++;
-
+        throw new Error(
+            `Failed to fetch repositories: ${res.status} ${errorData}`
+        )
     }
+
+    const repos = await res.json()
+
 
     const totalRepos = repos.length
     const originalRepos = repos.filter(repo => !repo.fork).length
@@ -56,19 +43,49 @@ export async function getRepoData(gUserName) {
     let collabedProjects = 0
     for (const repo of repos) {   // Don't use (const repo in repos) then repo will be 0,1,2,..
         const response = await fetch(`${process.env.GITHUB_API_URL}/repos/${repo.owner.login}/${repo.name}/contributors?per_page=2`, { headers })
+        // console.log(
+        //     `Contributors status for ${repo.name}:`,
+        //     response.status
+        // );
+
+        // if (!response.ok) {
+        //     const errorText = await response.text();
+
+        //     console.log("Contributors error:", errorText);
+
+        //     continue;
+        // }
+
+        // const contributors = await response.json();
+
+        console.log(
+            `Status for ${repo.name}: ${response.status}`
+        );
+
+        // Read the response body ONCE as text
+        const text = await response.text();
+
+        // If GitHub returned an unsuccessful response
         if (!response.ok) {
-            const errorText = await response.text();
-
-            console.error(
-                `Contributors fetch failed for ${repo.name}:`,
-                response.status,
-                errorText
-            );
-
+            console.log(`Failed for ${repo.name}:`, text);
             continue;
         }
 
-        const contributors = await response.json();
+        // If GitHub returned an empty response
+        if (!text.trim()) {
+            console.log(`Empty response for ${repo.name}`);
+            continue;
+        }
+
+        // Convert text to JSON
+        let contributors;
+
+        try {
+            contributors = JSON.parse(text);
+        } catch (error) {
+            console.log(`Invalid JSON for ${repo.name}:`, text);
+            continue;
+        }
 
         if (contributors.length == 1) {
             soloProjects += 1
@@ -139,7 +156,7 @@ export async function getRepoData(gUserName) {
             langPercentages[language] = (languageBytes[language] / totalBytes) * 100
             userSkills.add(language.toLowerCase())
             if (langPercentages[language] > 10) {
-                knownTech.add(language)
+                knownTech.add(language.toLowerCase())
             }
         }
     }
