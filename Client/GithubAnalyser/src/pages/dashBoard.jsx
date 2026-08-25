@@ -81,6 +81,7 @@ const dashBoard = () => {
             <div className="m-5">
                 <StatsGrid
                 totalRepos = {fetchedData.totalRepos}
+                analysedRepos={fetchedData.analysedRepos}
                 originalRepos = {fetchedData.originalRepos}
                 averageStars = {fetchedData.averageStars}
                 withDesc = {fetchedData.withDesc}

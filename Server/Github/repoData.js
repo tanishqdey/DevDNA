@@ -14,6 +14,22 @@ export async function getRepoData(gUserName) {
         Accept: "application/vnd.github+json"
     };
 
+    const userRes = await fetch(
+        `${process.env.GITHUB_API_URL}/users/${gUserName}`,
+        { headers }
+    );
+
+    if (!userRes.ok) {
+        const errorData = await userRes.text();
+
+        throw new Error(
+            `Failed to fetch GitHub user: ${userRes.status} ${errorData}`
+        );
+    }
+
+    const githubUser = await userRes.json();
+
+    const totalRepos = githubUser.public_repos;
 
     const res = await fetch(`${process.env.GITHUB_API_URL}/users/${gUserName}/repos?per_page=50&sort=updated`, { headers })
 
@@ -27,10 +43,9 @@ export async function getRepoData(gUserName) {
 
     const repos = await res.json()
 
-
-    const totalRepos = repos.length
+    const analysedRepos = repos.length
     const originalRepos = repos.filter(repo => !repo.fork).length
-    const forkedRepos = totalRepos - originalRepos
+    const forkedRepos = analysedRepos - originalRepos
 
 
     const averageStars = repos.length ? (repos.reduce((sum, repo) => sum += repo.stargazers_count, 0)) / repos.length : 0  // ternary operator
@@ -231,6 +246,7 @@ export async function getRepoData(gUserName) {
 
     return {
         totalRepos: totalRepos,
+        analysedRepos: analysedRepos,
         originalRepos: originalRepos,
         forkedRepos: forkedRepos,
         averageStars: averageStars,

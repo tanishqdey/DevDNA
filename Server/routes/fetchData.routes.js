@@ -44,6 +44,7 @@ router.get("/gitHubData/myAnalysis", verifyJWT, async function (req, res) {
             gUserName: gUserName,
             avatarUrl: avatarUrl,
             totalRepos: fetchedData.totalRepos,
+            analysedRepos: fetchedData.analysedRepos,
             originalRepos: fetchedData.originalRepos,
             forkedRepos: fetchedData.forkedRepos,
             averageStars: fetchedData.averageStars,

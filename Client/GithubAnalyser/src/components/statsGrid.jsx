@@ -8,18 +8,19 @@ import {
   Trophy,
 } from "lucide-react";
 
-const StatsGrid = ({ totalRepos, originalRepos, averageStars, withDesc, collabedProjects, popularProject }) => {
+const StatsGrid = ({ totalRepos, analysedRepos, originalRepos, averageStars, withDesc, collabedProjects, popularProject }) => {
 
   const stats = [
     {
       title: "Total Repositories",
       value: totalRepos,
+      subtitle: `Analyzed: ${analysedRepos} repositories`,
       icon: FolderGit2,
       color: "text-cyan-400",
     },
     {
       title: "Original Repositories",
-      value: originalRepos,
+      value: `${originalRepos}/${analysedRepos}`,
       icon: GitFork,
       color: "text-green-400",
     },
@@ -31,13 +32,13 @@ const StatsGrid = ({ totalRepos, originalRepos, averageStars, withDesc, collabed
     },
     {
       title: "Projects with Description",
-      value: withDesc,
+      value: `${withDesc}/${analysedRepos}`,
       icon: FileText,
       color: "text-indigo-400",
     },
     {
       title: "Collaborative Projects",
-      value: collabedProjects,
+      value: `${collabedProjects}/${analysedRepos}`,
       icon: Users,
       color: "text-orange-400",
     },
@@ -47,7 +48,7 @@ const StatsGrid = ({ totalRepos, originalRepos, averageStars, withDesc, collabed
       icon: Trophy,
       color: "text-pink-400",
     },
-  ]
+  ];
 
   return (
     <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -75,6 +76,12 @@ const StatsGrid = ({ totalRepos, originalRepos, averageStars, withDesc, collabed
                 <h2 className="mt-3 text-2xl font-bold text-white text-wrap">
                   {stat.value}
                 </h2>
+
+                {stat.subtitle && (
+                  <p className="mt-1 text-xs text-gray-400">
+                    {stat.subtitle}
+                  </p>
+                )}
 
               </div>
 

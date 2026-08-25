@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const DBConnect = async () => {
     try {
         console.log("MONGODB_URI exists:", !!process.env.MONGODB_URI);
-        console.log(
-            "MONGODB_URI starts with:",
-            JSON.stringify(process.env.MONGODB_URI?.substring(0, 30))
-        );
+        // console.log(
+        //     "MONGODB_URI starts with:",
+        //     JSON.stringify(process.env.MONGODB_URI?.substring(0, 30))
+        // );
         const connectionDetails = await mongoose.connect(process.env.MONGODB_URI);
 
         if (connectionDetails) {

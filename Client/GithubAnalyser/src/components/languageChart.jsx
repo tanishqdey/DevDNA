@@ -23,13 +23,33 @@ const COLORS = [
 
 const LanguageChart = ({ languages }) => {
 
-  const languageData = []
+  let othersPercentage = 0;
+
+  const languageData = [];
+
   for (const [language, percentage] of Object.entries(languages)) {
-    languageData.push({
-      name: techMap[language] || language,
-      value: Number(percentage.toFixed(1))
-    })
+
+    const value = Number(percentage.toFixed(1));
+
+    if (value < 2) {
+      othersPercentage += value;
+    }
+    else {
+      languageData.push({
+        name: techMap[language] || language,
+        value: value
+      });
+    }
   }
+
+  if (othersPercentage > 0) {
+    languageData.push({
+      name: "Others",
+      value: Number(othersPercentage.toFixed(1))
+    });
+  }
+
+  languageData.sort((a, b) => b.value - a.value);
 
   const allEmpty = languageData.every((language) => language.value === 0)
 
